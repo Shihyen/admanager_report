@@ -1,37 +1,106 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/Shihyen/admanager_report/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## 新手上路
 
 ### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+文件用Markdown語法寫在這裡。
 
-```markdown
-Syntax highlighted code block
+### 第一次的git
 
-# Header 1
-## Header 2
-### Header 3
+假設你已經照著說明建立好venv了，可以按照以下幾個步驟操作：
 
-- Bulleted
-- List
+1. 起始化 git 資料夾
+```console
+git init
 
-1. Numbered
-2. List
+# 會出現以下訊息
+Initialized empty Git repository in /app/admanager_report/.git/
+```
+2. 設定遠端檔案路徑
+```console
 
-**Bold** and _Italic_ and `Code` text
+git remote add origin https://github.com/Shihyen/admanager_report.git
 
-[Link](url) and ![Image](src)
+```
+3. 更新到最新的版本
+```console
+git pull origin master
+
+# 會出現以下訊息
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 9 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (9/9), done.
+From https://github.com/Shihyen/admanager_report
+ * branch            master     -> FETCH_HEAD
+ * [new branch]      master     -> origin/master
+
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+4. 切換到自己的分支(範例：feature/auth)
+```console
+git checkout -b feature/auth
 
-### Jekyll Themes
+# 會出現以下訊息
+Switched to a new branch 'feature/auth'
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Shihyen/admanager_report/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+5. 改完程式之後把資料更新上去
+```console
+git add .
+
+# 確認一下剛才新增的內容
+git status
+
+# 會出現以下訊息
+On branch feature/auth
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   xxxxxx (剛才新增的檔案)
+
+```
+
+6. 打上一個版本
+```console
+git commit -m '這是今天的工作內容，只是把東西更新上來而已'
+
+# 會出現以下訊息
+[feature/auth 1b10510] 這是今天的工作內容，只是把東西更新上來而已
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test
+ 
+```
+
+
+7. 更新到遠端，終於用到push了
+```console
+git push origin feature/auth
+
+# 會出現以下訊息
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 344 bytes | 344.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'feature/auth' on GitHub by visiting:
+remote:      https://github.com/Shihyen/admanager_report/pull/new/feature/auth
+remote:
+To https://github.com/Shihyen/admanager_report.git
+ * [new branch]      feature/auth -> feature/auth
+ 
+```
+
+8. 然後你要回去github的頁面
+
+大概是這個網址：https://github.com/Shihyen/admanager_report/compare?expand=1
+
+Open a pull request 底下的compare要選你剛剛push的branch，base選master，表示你要對master發出PR
+
+稍微確認一下訊息，沒問題的話就可以按下最下方的Create pull request
+
