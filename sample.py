@@ -16,24 +16,30 @@
 
 """Initializes a AdManagerClient using a Service Account."""
 
+import os
 import sys
 
+import env_file
 from googleads import ad_manager, oauth2
+
+env_file.load()
 
 # OAuth2 credential information. In a real application, you'd probably be
 # pulling these values from a credential storage.
-KEY_FILE = 'cert/cw-web-prod-ad-manager.json'
+KEY_FILE = os.getenv("KEY_FILE")
 
 # Ad Manager API information.
-APPLICATION_NAME = 'PerformanceReport'
+APPLICATION_NAME = os.getenv("APPLICATION_NAME")
 
+# Network Code
+NETWORK_CODE = os.getenv("NETWORK_CODE")
 
-def cert(key_file, application_name):
+def cert(key_file, application_name, network_code):
     oauth2_client = oauth2.GoogleServiceAccountClient(
         key_file, oauth2.GetAPIScope('ad_manager'))
 
     ad_manager_client = ad_manager.AdManagerClient(
-        oauth2_client, application_name, network_code='423694368')
+        oauth2_client, application_name, network_code=network_code)
 
     networks = ad_manager_client.GetService('NetworkService').getAllNetworks()
     for network in networks:
@@ -68,7 +74,10 @@ def get_all_orders(client):
 
 
 def main():
-    ad_manager_client = cert(KEY_FILE, APPLICATION_NAME)
+    # get certificated ad manager client
+    ad_manager_client = cert(KEY_FILE, APPLICATION_NAME, NETWORK_CODE)
+
+    # get all orders
     get_all_orders(ad_manager_client)
 
     sys.exit(0)
@@ -76,4 +85,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
