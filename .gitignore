@@ -108,3 +108,6 @@ venv.bak/
 
 # cert
 cert
+
+# googleads
+googleads.yaml
